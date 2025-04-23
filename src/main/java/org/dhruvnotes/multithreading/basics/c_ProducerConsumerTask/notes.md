@@ -39,11 +39,40 @@ Item available by Thread-0 and invoking all threads which are waiting
 Item now consumed by Thread-1
 ```
 
-Even after adding `Thread.sleep()`, the consumer still started first, which is fine.
+---
+
+### 🔁 Actual Flow:
+
+1. **Consumer thread starts first** (you started it immediately after the producer):
+
+  * It enters the `consumeItem()` method.
+  * Checks `while (!itemAvailable)` → it's `true`, so it:
+
+    * Logs that it’s waiting.
+    * Calls `wait()` → goes to sleep and releases the monitor/lock.
+
+2. **Producer thread wakes up after 5 seconds** (`Thread.sleep(5000)`):
+
+  * It enters the `addItem()` method.
+  * Sets `itemAvailable = true`.
+  * Calls `notifyAll()` → wakes the consumer thread that was waiting.
+
+3. **Consumer thread is now woken up** by the `notifyAll()`:
+
+  * It re-checks `while (!itemAvailable)` → now `false` (because item is available).
+  * Consumes the item.
+  * Logs the success.
+  * Resets `itemAvailable = false` for future.
+
+---
+
+### 💡 Important Note
+We're using a `while (!itemAvailable)` loop instead of just `if (!itemAvailable)` because **even after being notified**, a thread should **re-check the condition** (in case of spurious wakeups or if another thread took the item). This is **good practice** and **exactly correct**.
+
+
 
 ## Final Thoughts
 - Thread execution order is **not deterministic**.
 - `wait()` and `notifyAll()` correctly handle synchronization **even if consumer runs first**.
 - Use `join()` if strict ordering is needed.
 
-This covers the core understanding of Java's Producer-Consumer synchronization. 🚀
