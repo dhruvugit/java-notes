@@ -1,0 +1,2 @@
+* All data members in interface are constants (public static final)
+* So if you have a logic where you need to share base logic that all should have avoid using this use abstract class if classes share same bases logic 
