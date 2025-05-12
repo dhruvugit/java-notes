@@ -11,7 +11,6 @@ public class Main {
 
         MultiThreadingLearning2 multiThreadingLearning2 = new MultiThreadingLearning2();
         multiThreadingLearning2.start();
-
-
+//        multiThreadingLearning2.join();
     }
 }

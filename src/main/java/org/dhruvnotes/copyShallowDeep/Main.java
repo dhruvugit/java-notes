@@ -18,12 +18,5 @@ public class Main {
         System.out.println("Person Shallow2 before change :  " + personShallow2);
         personShallow.address.line1 = "Changed line";
         System.out.println("Person shallow 2 after change: " + personShallow2);
-
-
-
-
-
-
-
     }
 }

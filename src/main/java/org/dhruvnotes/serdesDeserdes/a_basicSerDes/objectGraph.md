@@ -1,13 +1,10 @@
----
-
 ### 🔹 **Object Graph in Serialization (with Code)**
 
-#### **Concept**
+### **Concept**
 - When you serialize an object, all objects **reachable from it** are also serialized — this is called the **Object Graph**.
 - Every object in this graph must implement `Serializable`.
 - If **any object is not serializable**, you'll get a `NotSerializableException`.
 
----
 
 ### **Code Example**
 

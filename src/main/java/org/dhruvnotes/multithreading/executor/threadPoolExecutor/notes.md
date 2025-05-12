@@ -165,9 +165,6 @@ By managing thread creation and scheduling effectively, **ThreadPools** prevent 
 
 
 
-Here’s your **Markdown notes** for why shutting down a **ThreadPool** is necessary:
-
-
 # Why Do We Need to Shut Down a Thread Pool?
 
 A `ThreadPoolExecutor` manages a pool of worker threads. Proper shutdown is necessary to:
@@ -213,6 +210,7 @@ Each thread has its own stack for local variables and method calls.
   ```bash
   java -Xss512k MyApplication
   ```
+  JVM option -Xss sets the stack size per thread, affecting how deep method calls can go (larger size for deep recursion) and how many threads can exist simultaneously (smaller size conserves memory). Using thread pools with appropriate -Xss values ensures better scalability and stability in concurrent Java applications.
 
 ---
 
